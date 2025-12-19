@@ -24,11 +24,11 @@
 
     <script>
         const button = document.getElementById("speakBtn");
-        const input = document.getElementById("text");
+        const p = document.getElementById("text");
 
         button.addEventListener("click", function () {
 
-            const speech = new SpeechSynthesisUtterance(input.value);
+            const speech = new SpeechSynthesisUtterance(p.value);
             speech.lang = "en-US"; // pode trocar para en-US
             window.speechSynthesis.speak(speech);
         });
