@@ -27,10 +27,6 @@
         const input = document.getElementById("text");
 
         button.addEventListener("click", function () {
-            if (input.value === "") {
-                alert("Digite algum texto primeiro!");
-                return;
-            }
 
             const speech = new SpeechSynthesisUtterance(input.value);
             speech.lang = "en-US"; // pode trocar para en-US
