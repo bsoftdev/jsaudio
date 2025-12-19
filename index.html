@@ -1,15 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ingles</title>
+    <meta charset="UTF-8">
+    <title>Text to Speech</title>
 </head>
 <body>
 
-    <input type="text" id="text" placeholder="Type something...">
-    
-    <button onclick="const text = document.getElementById('text').value; speechSynthesis.speak(new SpeechSynthesisUtterance(text));">Ouvir</button>
-  
+    <h2>Text to Speech</h2>
+
+    <input type="text" id="text" placeholder="Digite algo aqui">
+    <br><br>
+
+    <button id="speakBtn">🔊 Falar</button>
+
+    <script>
+        const button = document.getElementById("speakBtn");
+        const input = document.getElementById("text");
+
+        button.addEventListener("click", function () {
+            if (input.value === "") {
+                alert("Digite algum texto primeiro!");
+                return;
+            }
+
+            const speech = new SpeechSynthesisUtterance(input.value);
+            speech.lang = "pt-PT"; // pode trocar para en-US
+            window.speechSynthesis.speak(speech);
+        });
+    </script>
+
 </body>
 </html>
