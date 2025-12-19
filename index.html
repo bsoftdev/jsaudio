@@ -20,16 +20,37 @@
         We are committed to innovation, teamwork, and continuous learning, aiming to build a better digital future.
     </p>
 
-    <br>
     <button id="speakBtn">🔊 Falar</button>
 
     <script>
         const button = document.getElementById("speakBtn");
-        const p = document.getElementById("text");
+        const text = document.getElementById("text");
 
-        button.addEventListener("click", function () {
-            const speech = new SpeechSynthesisUtterance(p.textContent);
+        let voices = [];
+
+        function loadVoices() {
+            voices = window.speechSynthesis.getVoices();
+        }
+
+        // evento obrigatório para DESKTOP
+        window.speechSynthesis.onvoiceschanged = loadVoices;
+
+        button.addEventListener("click", () => {
+
+            if (!voices.length) {
+                loadVoices();
+            }
+
+            const speech = new SpeechSynthesisUtterance(text.textContent);
             speech.lang = "en-US";
+
+            // escolhe uma voz em inglês se existir
+            const englishVoice = voices.find(v => v.lang === "en-US");
+            if (englishVoice) {
+                speech.voice = englishVoice;
+            }
+
+            window.speechSynthesis.cancel(); // evita sobreposição
             window.speechSynthesis.speak(speech);
         });
     </script>
